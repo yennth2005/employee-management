@@ -221,3 +221,20 @@ body {
 .input-group .btn-primary {
   border-radius: 0 5px 5px 0;
 }
+
+.input-group-text {
+  background-color: #f8f9fa; /* Màu nền nhẹ cho biểu tượng */
+}
+
+.btn-danger {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  transition: background-color 0.3s, transform 0.2s; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+.btn:hover {
+  transform: scale(1.05); /* Phóng to một chút khi hover */
+}

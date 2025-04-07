@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api')->middleware('cors')->group(function () {
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('positions', PositionController::class);
+    Route::post('/positions/import', [PositionController::class, 'import']);
 });

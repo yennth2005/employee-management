@@ -1,34 +1,12 @@
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import MainLayout from "./components/MainLayout";
-// import Dashboard from "./pages/Dashboard";
-// import Departments from "./pages/Departments";
-// import Employees from "./pages/Employees";
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<MainLayout />}>
-//           <Route index element={<Dashboard />} />
-//           <Route path="departments" element={<Departments />} />
-//           <Route path="employees" element={<Employees />} />
-//         </Route>
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS của Toastify
 import Layout from './components/Layout';
-import MainLayout from './components/MainLayout';
+import MainLayout from './layouts/MainLayout';
 // import DepartmentPage from './pages/Departments';
 import Department from './components/Department';
-import Positions from './components/Positions';
+import Positions from './pages/Positions';
 const App = () => {
   return (
     <Router>

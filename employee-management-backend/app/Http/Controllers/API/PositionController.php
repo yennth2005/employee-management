@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PositionsImport;
 use App\Models\Position;
 use App\Http\Requests\PositionRequest;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PositionController extends Controller
 {
@@ -48,5 +51,28 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
         $position->delete();
         return response()->json(['message' => 'Position deleted successfully']);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+    
+        $file = $request->file('file');
+    
+        try {
+            Excel::import(new PositionsImport, $file);
+    
+            return response()->json([
+                'message' => 'Import completed successfully.',
+            ], 200);
+    
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            return response()->json(['message' => 'Validation error during import.', 'errors' => $failures], 400);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error processing Excel file.', 'error' => $e->getMessage()], 500);
+        }
     }
 }

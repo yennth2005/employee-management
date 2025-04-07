@@ -210,6 +210,39 @@ const Positions = () => {
         </div>
       </form>
 
+
+      <form
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', e.target.file.files[0]);
+
+    try {
+      await axios.post('http://localhost:8000/api/positions/import', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      toast.success('Import thành công!');
+      fetchPositions(); // reload lại danh sách
+    } catch (error) {
+      toast.error('Lỗi khi import!');
+      console.error(error);
+    }
+  }}
+>
+  <div className="row mb-3">
+    <div className="col-md-6">
+      <input type="file" name="file" accept=".xlsx,.xls,.csv" className="form-control" />
+    </div>
+    <div className="col-md-2">
+      <button type="submit" className="btn btn-success">
+        Import Excel
+      </button>
+    </div>
+  </div>
+</form>
+
       {/* Bảng hiển thị positions */}
       <table className="table table-bordered">
         <thead>
